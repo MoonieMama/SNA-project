@@ -75,3 +75,9 @@ sapply(unique(membership(lp)), function(k) {
 
 #Community comparison of fast greedy and label propagation
 compare(fc,lp)
+
+#closeness centrality in cluster graph with community id 11 under fast greedy
+closeness(cg2,V(cg2))
+
+#betweenness centrality in cluster graph with community id 11 under fast greedy
+betweenness(cg2,V(cg2))
