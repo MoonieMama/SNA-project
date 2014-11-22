@@ -1,0 +1,11 @@
+> compare(imc,lp)
+[1] 1.539878
+
+ compare(wc,imc)
+[1] 4.126955
+
+> compare(wc,lp)
+[1] 3.901818
+
+> compare(fc,lp)
+[1] 6.368241

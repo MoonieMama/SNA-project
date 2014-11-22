@@ -3,11 +3,13 @@ from sets import Set
 
 def parse(filename):
   f = gzip.open(filename, 'r')
-  f1 = open("pid.gdf",'w')
+  #f1 = open("pid.gdf",'w')
+  f1 = open("pid.txt",'w')
   ctr=0
-  f1.write("nodedef>name,label varchar(200),label1 varchar(10)\n")
+  #f1.write("nodedef>name,label varchar(200),label1 varchar(10)\n")
   for l in f:
 	l = l.strip()
+	#for products which have no information
 	if "discontinued" in l:
 		f1.write(",,")
 	if "Id:" in l:
@@ -16,28 +18,33 @@ def parse(filename):
 			break
 		ctr = ctr + 1
 		colonPos = l.find(':')
+		#writing id
 		f1.write(l[colonPos+4:])
 	if "title" in l:
 		f1.write(",")
 		colonPos = l.find(':')
+		#writing title of product
 		f1.write(l[colonPos+2:])
 	if "group" in l:
 		f1.write(",")
 		colonPos = l.find(':')
+		#category of product
 		f1.write(l[colonPos+2:])
   f2 = open("D:\\Courses\\Social Network Analysis\\project\\Amazon0302.txt")
-  f1.write("edgedef>node1,node2\n")
+  #f1.write("edgedef>node1,node2\n")
   for l in f2:
 	l = l.strip()
 	spacePos = l.find('\t')
-	f1.write(l[:spacePos])
-	f1.write(',')
-	f1.write(l[spacePos+1:])
-	f1.write("\n")
+	#first node
+	#f1.write(l[:spacePos])
+	#f1.write(',')
+	#end node of edge
+	#f1.write(l[spacePos+1:])
+	#f1.write("\n")
 		
 def parseCustomer(filename):
 	f = gzip.open(filename, 'r')
-	f1 = open("D:\\Courses\\Social Network Analysis\\project\\pid_cid_edges.txt",'w')
+	f1 = open("D:\\Courses\\Social Network Analysis\\project\\pid_cid_edges_weighted2.txt",'w')
 	#f2 = open("pid_cid_nodes.txt",'w')
 	nodes = Set([])
 	prevId = ""
@@ -68,8 +75,9 @@ def parseCustomer(filename):
 			f1.write(customer)
 			f1.write(" ")
 			f1.write(prevId)
-			# f1.write(" ")
-			# f1.write(l1[rColPos+2:rColPos+3])
+			f1.write(" ")
+			#rating between 0-5 - occupies 1 character length
+			f1.write(l1[rColPos+2:rColPos+3])
 			f1.write("\n")
 	#f2.write("nodedef>name\n")
 	#for node in nodes:
